@@ -1,0 +1,84 @@
+<!-- Dialog Form Section -->
+<div mat-dialog-title>Add Item List</div>
+<div mat-dialog-content>
+  <form [formGroup]="formValue">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="errorHandling('name', 'required')">
+        You must provide a <strong>name</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>tags</mat-label>
+      <input matInput formControlName="tags" />
+      <mat-error *ngIf="errorHandling('tags', 'required')">
+        You must provide a <strong>tags</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>favorite</mat-label>
+      <input matInput formControlName="favorite" />
+      <mat-error *ngIf="errorHandling('favorite', 'required')">
+        You must provide a <strong>favorite</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>cookTime $</mat-label>
+      <input type="number" formControlName="cookTime" matInput />
+      <mat-error *ngIf="errorHandling('cookTime', 'pattern')">
+        Price must be <strong>cookTime</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>origins</mat-label>
+      <mat-select formControlName="origins">
+        <mat-option value="coffee">origins</mat-option>
+        <mat-option value="coffeeaccessories">origins Accessories</mat-option>
+        <mat-error *ngIf="errorHandling('origins', 'required')">
+          You must select a <strong>origins</strong>
+        </mat-error>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>price</mat-label>
+      <textarea matInput formControlName="price"></textarea>
+      <mat-error *ngIf="errorHandling('price', 'required')">
+        You must provide a <strong>price</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Image URL</mat-label>
+      <textarea matInput formControlName="imageUrl"></textarea>
+      <mat-error *ngIf="errorHandling('imageUrl', 'pattern')">
+        You must provide a <strong>image URL</strong>
+      </mat-error>
+    </mat-form-field>
+    <div>Preview</div>
+    <img src="{{ formValue.value.image }}" alt="" />
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="updateItem()"
+    *ngIf="showUpdateButton"
+  >
+    Update
+  </button>
+
+  <!-- Post Button -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="postItem()"
+    *ngIf="!showUpdateButton"
+  >
+    Add
+  </button>
+  <button mat-raised-button color="warn" mat-dialog-close (click)="close()">
+    Close
+  </button>
+</div>
